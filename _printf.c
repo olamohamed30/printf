@@ -11,7 +11,6 @@ int _printf(const char *format, ...)
 	/*تعريف الحجات*/
 	va_list arg;
 	int creturn = 0;
-	char c;
 
 	va_start(arg, format);
 
@@ -32,14 +31,12 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 					/*حاله الحرف هنطبع عادي ونزود الكونت */
-					c = va_arg(arg, int);
 					write(1, &c, 1);
 					creturn++;
 					break;
 				case 's':
 					{
 						/*بما انه نص نفس شغل ال char بس ب لوب */
-						char *string = va_arg(arg, char*);
 						while (*string)
 							/*لما نوصل  null terminator */
 						{
