@@ -5,7 +5,7 @@
  *   * @format: arg that will be added to fun
  *    * @... :
  *     *Return 
- *      **/
+ */
  
 
 int _printf(const char *format, ...)
