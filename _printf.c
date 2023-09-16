@@ -1,13 +1,10 @@
 #include "main.h"
-#include <unistd.h> 
+#include <unistd.h>
 /**
  *_printf - printf fun
  *@format :
  *@... :
  *Return :
- *  * _printf- printf made by duaa and ola
- *   * @format: arg that will be added to fun
- *    * @... :
  */
 int _printf(const char *format, ...)
 {
@@ -17,6 +14,7 @@ int _printf(const char *format, ...)
 	char c;
 
 	va_start(arg, format);
+
 	/*لوب */
 	for (; *format; format++)
 	{
@@ -24,7 +22,7 @@ int _printf(const char *format, ...)
 		if (*format != '%')
 		{
 			write(1, format, 1);
-			creturn ++;
+			creturn++;
 		}
 		else
 			/*  لو هي هنعمل ال سوتش علي كل حاله */
@@ -77,5 +75,5 @@ int _printf(const char *format, ...)
 
 	va_end(arg);
 
-	return creturn;
+	return (creturn);
 }
