@@ -74,6 +74,12 @@ void intduaa(va_list *arg, int *c)
 	}
 	else
 	{
+		while (du > 0)
+		{
+			buffer[inc++] = '0' + du % 10;
+			du /= 10;
+		}
+	}
 
         while (start < end)
         {
@@ -81,7 +87,6 @@ void intduaa(va_list *arg, int *c)
                 buffer[start++] = buffer [end];
                 buffer[end--] = temp;
         }
-	}
 
         write(1, buffer, inc);
 
