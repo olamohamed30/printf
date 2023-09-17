@@ -1,14 +1,15 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
-/**
- * *duaa i/d
- */
 
 /**
- *charola -  char specifier
- *@arg: Arg
- *@c: Count  printed char
+ * charola - Handles the char specifier.
+ * @arg: The argument list containing the character to print.
+ * @c: The character count.
+ *
+ * Description: This function handles the character specifier for the custom
+ * printf function. It retrieves the character from the argument list, writes
+ * it to the standard output, and increments the character count.
  */
 void charola(va_list *arg, int *c)
 {
@@ -20,14 +21,15 @@ void charola(va_list *arg, int *c)
 }
 
 /**
- *stringola - string specifier
- *@arg: Arg
+ * stringola - string specifier
+ * @arg: Arg
  * @c: Count for printed char
  */
 void stringola(va_list *arg, int *c)
 {
 	char *st;
 	int k;
+
 	st = va_arg(*arg, char*);
 
 	for (k = 0; st && st[k]; k++)
@@ -60,16 +62,16 @@ int allspec(const char *format, va_list *arg, int *c)
 			return (2);
 		case 'i':
 		case 'd':
-			/*duaa*/
+
 		default:
 			return (1);
 	}
 }
 
 /**
- *  * _printf - printfduaa/ola fun
- *   * @format:  string
- *    * Return: Num of char
+ * _printf - printfduaa/ola fun
+ * @format:  string
+ * Return: Num of char
  */
 int _printf(const char *format, ...)
 {
