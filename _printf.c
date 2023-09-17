@@ -38,6 +38,49 @@ void stringola(va_list *arg, int *c)
 		(*c)++;
 	}
 }
+/**
+ * intduaa - handles the int specifier
+ * @arg: the arg contain the int to print
+ * @c: the char count
+ *
+ * du - retrieve the integer argument
+ * buffer - hold integers as strings
+ * inc - initialize num of char to zero
+ * start - reverse string
+ * end - reverse the string
+ * tmp - handles reversing the string
+ */
+void intduaa(va_list *arg, int *c)
+{
+        char buffer[10];
+        int du;
+        int inc = 0;
+        int start = 0;
+        int end = inc - 1;
+        char temp;
+
+        du = va_arg(*arg, int);
+
+        if (du < 0)
+        {
+                inc = 1;
+        }
+        else
+        {
+                inc = 0;
+        }
+
+        while (start < end)
+        {
+                temp = buffer[start];
+                buffer[start++] = buffer [end];
+                buffer[end--] = temp;
+        }
+
+        write(1, buffer, inc);
+
+        *c += inc;
+}
 
 /**
  * allspec - know the specifier then go to its fun
@@ -62,6 +105,8 @@ int allspec(const char *format, va_list *arg, int *c)
 			return (2);
 		case 'i':
 		case 'd':
+			intduaa(arg,c);
+			return (2);
 
 		default:
 			return (1);
