@@ -110,8 +110,10 @@ int allspec(const char *format, va_list *arg, int *c)
 			(*c)++;
 			return (2);
 		case 'i':
+			intduaa(arg, c);
+			return(2);
 		case 'd':
-			intduaa(arg,c);
+			intduaa(arg, c);
 			return (2);
 
 		default:
