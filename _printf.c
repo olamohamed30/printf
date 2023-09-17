@@ -40,8 +40,6 @@ void stringola(va_list *arg, int *c)
 }
 /**
  * intduaa - handles the int specifier
- * @arg: the arg contain the int to print
- * @c: the char count
  *
  * du - retrieve the integer argument
  * buffer - hold integers as strings
@@ -52,7 +50,7 @@ void stringola(va_list *arg, int *c)
  */
 void intduaa(va_list *arg, int *c)
 {
-        char buffer[10];
+        char buffer[50];
         int du;
         int inc = 0;
         int start = 0;
