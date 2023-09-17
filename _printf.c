@@ -50,7 +50,7 @@ void stringola(va_list *arg, int *c)
  */
 void intduaa(va_list *arg, int *c)
 {
-        char buffer[50];
+        char buffer[10];
         int du;
         int inc = 0;
         int start = 0;
