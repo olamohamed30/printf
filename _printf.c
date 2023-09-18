@@ -9,7 +9,7 @@
  *
  * Description: This function handles the character specifier for the custom
  * printf function. It retrieves the character from the argument list, writes
- * it to the standard output, and increments the character count.
+ * ithe t, and increments the character count.
  */
 void charola(va_list *arg, int *c)
 {
