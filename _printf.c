@@ -50,11 +50,12 @@ void stringola(va_list *arg, int *c)
  */
 void intduaa(va_list *arg, int *c)
 {
-        char buffer[10];
+        char buffer[20];
         int du;
-        int inc = 0;
+        int inc;
         int start = 0;
-        int end = inc - 1;
+	int count = 0;
+        int end = count - 1;
         char temp;
 
         du = va_arg(*arg, int);
@@ -70,15 +71,20 @@ void intduaa(va_list *arg, int *c)
 
 	if (du == 0)
 	{
-		buffer[inc++] = '0';
+		buffer[count++] = '0';
 	}
 	else
 	{
 		while (du > 0)
 		{
-			buffer[inc++] = '0' + du % 10;
+			buffer[count++] = '0' + du % 10;
 			du /= 10;
 		}
+	}
+
+	if (inc)
+	{
+		buffer[count++] = '-';
 	}
 
         while (start < end)
@@ -88,9 +94,9 @@ void intduaa(va_list *arg, int *c)
                 buffer[end--] = temp;
         }
 
-        write(1, buffer, inc);
+        write(1, buffer, count);
 
-        *c += inc;
+        *c += count;
 }
 
 /**
@@ -115,8 +121,6 @@ int allspec(const char *format, va_list *arg, int *c)
 			(*c)++;
 			return (2);
 		case 'i':
-			intduaa(arg, c);
-			return(2);
 		case 'd':
 			intduaa(arg, c);
 			return (2);
