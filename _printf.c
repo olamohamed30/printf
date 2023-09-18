@@ -40,7 +40,7 @@ void stringola(va_list *arg, int *c)
 }
 /**
  * intduaa - handles the int specifier
- *
+ * count - counts the string bytes
  * du - retrieve the integer argument
  * buffer - hold integers as strings
  * inc - initialize num of char to zero
@@ -51,27 +51,19 @@ void stringola(va_list *arg, int *c)
 void intduaa(va_list *arg, int *c)
 {
         char buffer[20];
-        int du;
-        int inc;
-        int start = 0;
+        int du = va_arg(*arg, int);
 	int count = 0;
-        int end = count - 1;
-        char temp;
-
-        du = va_arg(*arg, int);
 
         if (du < 0)
         {
-                inc = 1;
+                write(1, "-", 1);
+		(*c)++;
+		du = -du;
         }
-        else
-        {
-                inc = 0;
-        }
-
 	if (du == 0)
 	{
-		buffer[count++] = '0';
+		write(1, "0", 1);
+		(*c)++;
 	}
 	else
 	{
@@ -80,23 +72,12 @@ void intduaa(va_list *arg, int *c)
 			buffer[count++] = '0' + du % 10;
 			du /= 10;
 		}
+		while (count > 0)
+		{
+			write(1, &buffer[--count], 1);
+			(*c)++;
+		}
 	}
-
-	if (inc)
-	{
-		buffer[count++] = '-';
-	}
-
-        while (start < end)
-        {
-                temp = buffer[start];
-                buffer[start++] = buffer [end];
-                buffer[end--] = temp;
-        }
-
-        write(1, buffer, count);
-
-        *c += count;
 }
 
 /**
