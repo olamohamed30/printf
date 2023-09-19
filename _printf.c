@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "main.h"
 /**
@@ -75,13 +76,18 @@ void olaoctal(va_list *arg, int *c)
 {
 	unsigned int n = va_arg(*arg, unsigned int);
 	char bufer[20];
-	itoa(num, bufer, 8);
-	for (int j = 0; buffer[j]; j++)
+	int j;
+
+	itoa(n, bufer, 8);
+	for (j = 0; bufer[j]; j++)
 	{
 		write(1, &bufer[j], 1);
 		(*c)++;
 	}
 }
+
+
+
 
 /**
  * charola - Handles the char specifier.
@@ -137,6 +143,46 @@ void stringola(va_list *arg, int *c)
 		write(1, &st[k], 1);
 		(*c)++;
 	}
+}
+
+
+/**
+ * olahexlower - fun deals with the octal specifier 
+ * @arg: Argu list
+ * @c: Count for printed char
+ */
+void olahexlower(va_list *arg, int *c)
+{
+unsigned int n = va_arg(*arg, unsigned int);
+    char buffer[20];
+    int in ;
+    
+    itoa(n, buffer, 16);
+    for (in = 0; buffer[in]; in++)
+    {
+        write(1, &buffer[in], 1);
+        (*c)++;
+    }
+}
+
+/**
+ * olahexupper - fun deals with the octal specifier 
+ * @arg: Argu list
+ * @c: Count for printed char
+ */
+void olahexupper(va_list *arg, int *c)
+{
+    unsigned int n = va_arg(*arg, unsigned int);
+    char buffer[20];
+    int j;
+    itoa(n, buffer, 16);
+    for (j = 0; buffer[j]; j++)
+    {
+        buffer[j] = toupper(buffer[j]);
+        
+        write(1, &buffer[j], 1);
+        (*c)++;
+    }
 }
 
 /**
