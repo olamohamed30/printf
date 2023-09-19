@@ -9,7 +9,7 @@
 
 /**
  * olapoint - Handles the pointer specifier
- * @args: Arg list
+ * @arg: Arg list
  * @c: Counter for printed characters
  */
 void olapoint(va_list *arg, int *c)
