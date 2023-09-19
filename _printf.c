@@ -48,14 +48,19 @@ void stringola(va_list *arg, int *c)
  * end - reverse the string
  * tmp - handles reversing the string
  */
-void intduaa(va_list *arg, int *c)
+void intduaa(va_list *arg, int *c, char *buffer, int buffer_size)
 {
-        char buffer[20];
         int du = va_arg(*arg, int);
 	int count = 0;
 
+	int inc = 0;
+        int start = 0;
+        int end = inc - 1;
+        char temp;
+
         if (du < 0)
         {
+		inc = 1;
                 write(1, "-", 1);
 		(*c)++;
 		du = -du;
@@ -67,7 +72,7 @@ void intduaa(va_list *arg, int *c)
 	}
 	else
 	{
-		while (du > 0)
+		while (du > 0 && count < buffer_size)
 		{
 			buffer[count++] = '0' + du % 10;
 			du /= 10;
@@ -78,8 +83,22 @@ void intduaa(va_list *arg, int *c)
 			(*c)++;
 		}
 	}
-}
 
+	if (inc && count < buffer_size)
+	{
+		buffer[count++]= '-';
+	}
+
+        while (start < end)
+        {
+                temp = buffer[start];
+                buffer[start++] = buffer [end];
+                buffer[end--] = temp;
+        }
+
+        write(1, buffer, count);
+	(*c) += count;
+}
 /**
  * allspec - know the specifier then go to its fun
  * @format: Format string
@@ -89,6 +108,8 @@ void intduaa(va_list *arg, int *c)
       */
 int allspec(const char *format, va_list *arg, int *c)
 {
+	 char buffer[1024];
+
 	switch (format[1])
 	{
 		case 'c':
@@ -103,7 +124,7 @@ int allspec(const char *format, va_list *arg, int *c)
 			return (2);
 		case 'i':
 		case 'd':
-			intduaa(arg, c);
+			intduaa(arg, c, buffer, sizeof(buffer));
 			return (2);
 
 		default:
