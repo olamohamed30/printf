@@ -28,26 +28,80 @@ char *itoa(int value, char *buffer, int base)
 		value /= base;
 		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tmp_value - value * base)];
 	}
-	
+
 	while (value);
 
-	
+
 	if (tmp_value < 0 && base == 10)
 	{
 		*ptr++ = '-';
 	}
-	
+
 	*ptr-- = '\0';
-	
+
 	while (ptr1 < ptr) 
 	{
 		tmp_char = *ptr;
 		*ptr-- = *ptr1;
 		*ptr1++ = tmp_char;
 	}
-	
-	return buffer;
+
+	return (buffer);
 }
+
+/**
+ * olapoint - Handles the pointer specifier
+ * @args: Arg list
+ * @c: Counter for printed characters
+ */
+void olapoint(va_list *arg, int *c)
+{
+	void *ad = va_arg(*arg, void*);
+	int in;
+	char buffer[20];
+
+	sprintf(buffer, "%p", ad);
+
+	for (in = 0; buffer[in]; in++)
+	{
+		write(1, &buffer[in], 1);
+		(*c)++;
+	}
+}
+
+char* itoa(int value, char* bufer, int base) {
+	char *p;
+	char *p1;
+	char tc;
+	int tv;
+
+	if (base < 2 || base > 36) {
+		*bufer = '\0';
+		return bufer;
+	}
+
+	p = bufer;
+	p1 = bufer;
+
+	do {
+		tv = value;
+		value /= base;
+		*p++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tv - value * base)];
+	} while (value);
+
+	if (tv < 0 && base == 10) 
+	{
+		*p++ = '-';
+	}
+
+	*p-- = '\0';
+
+	while (p1 < p) 
+	{
+		    tc = *p;
+		        *p-- = *p1;
+			    *p1++ = tc;
+	}
 
 /**
  * intduaa - handles the int specifier
@@ -136,8 +190,6 @@ void olaoctal(va_list *arg, int *c)
  * @c: The character count.
  *
  * Description: This function handles the character specifier for the custom
- * printf function. It retrieves the character from the argument list, writes
- * ithe t, and increments the character count.
  */
 void charola(va_list *arg, int *c)
 {
@@ -235,6 +287,9 @@ int allspec(const char *format, va_list *arg, int *c)
 
 	switch (format[1])
 	{
+		case 'p':
+			olapoint(arg, c);
+			return (2);
 		case 'u':
 			olaunsign(arg, c);
 			return (2);
