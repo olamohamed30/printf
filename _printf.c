@@ -62,10 +62,12 @@ void intduaa(va_list *arg, int *c, int buffer_size)
         {
 		buffer[count++] = '-';
 		du = -du;
+		(*c)++;
         }
 	if (du == 0)
 	{
 		buffer[count++] = '0';
+		(*c)++;
 	}
 	else
 	{
