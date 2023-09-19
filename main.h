@@ -9,10 +9,8 @@
 
 #define BUFSIZE 1024
 
-/*char *string = va_arg(arg, char*);*/
-/*char c = va_arg(arg, int);*/
 int _printf(const char *format, ...);
-
+void rev_st(va_list *arg, int *c);
 /**void intduaa(va_list *arg, int *c)
 {
 	char buffer[10];
