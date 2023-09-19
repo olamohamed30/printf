@@ -16,6 +16,7 @@ void olaunsign(va_list *arg, int *c);
 void olaoctal(va_list *arg, int *c);
 void olahexlower(va_list *arg, int *c);
 void olahexupper(va_list *arg, int *c);
+char *itoa(int value, char *str, int base);
 
 /**
  * intduaa - handles the int specifier

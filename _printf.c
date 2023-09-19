@@ -1,6 +1,10 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdlib.h>
+
+
+
 
 /**
  * charola - Handles the char specifier.
@@ -25,7 +29,7 @@ void charola(va_list *arg, int *c)
  * @arg: Arg list
  * @c: Count printed char
  */
-void olaunsign(va_list *arg, int *c);
+void olaunsign(va_list *arg, int *c)
 {
 	int in;
 	unsigned int n = va_arg(*arg, unsigned int);
@@ -71,7 +75,7 @@ int allspec(const char *format, va_list *arg, int *c)
 	switch (format[1])
 	{
 		case 'u':
-			olaunsig(arg, c);
+			olaunsign(arg, c);
 			return (2);
 		case 'X':
 			olahexupper(arg, c);
@@ -101,7 +105,7 @@ int allspec(const char *format, va_list *arg, int *c)
 			return (2);
 		case 'r':
 			rev_st(arg, c);
-			return(2);
+			return (2);
 
 		default:
 			return (1);
