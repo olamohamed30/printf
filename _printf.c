@@ -5,6 +5,43 @@
 #include <ctype.h>
 
 #include "main.h"
+
+#include <stdbool.h>
+
+char* itoa(int value, char* buffer, int base) {
+    char* ptr;
+    char* ptr1;
+    char tmp_char;
+    int tmp_value;
+
+    if (base < 2 || base > 36) {
+        *buffer = '\0';
+        return buffer;
+    }
+
+    ptr = buffer;
+    ptr1 = buffer;
+
+    do {
+        tmp_value = value;
+        value /= base;
+        *ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tmp_value - value * base)];
+    } while (value);
+
+    if (tmp_value < 0 && base == 10) {
+        *ptr++ = '-';
+    }
+    *ptr-- = '\0';
+    while (ptr1 < ptr) {
+        tmp_char = *ptr;
+        *ptr-- = *ptr1;
+        *ptr1++ = tmp_char;
+    }
+    return buffer;
+}
+
+
+
 /**
  * intduaa - handles the int specifier
  * count - counts the string bytes
