@@ -138,13 +138,6 @@ void stringola(va_list *arg, int *c)
 
 	st = va_arg(*arg, char);
 
-	if (st == NULL)
-	{
-		write (1 , "null", 4);
-		(*c) += 4;
-		return;
-	}
-
 	for (k = 0; st && st[k]; k++)
 	{
 		write(1, &st[k], 1);
