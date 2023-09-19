@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "main.h"
 /**
  * intduaa - handles the int specifier
  * count - counts the string bytes
@@ -43,7 +42,6 @@
         }
 }
 
-#include "main.h"
 /**
  * rev_st - handles the %r specifer
  * @arg: argument parameter handeling
