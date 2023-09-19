@@ -6,39 +6,39 @@
 
 #include <stdbool.h>
 
-char* itoa(int value, char* buffer, int base)
-{
-    char *ptr;
-    char *ptr1;
-    char tmp_char;
-    int tmp_value;
+char* itoa(int value, char* bufer, int base) {
+	char *p;
+	char *p1;
+	char tc;
+	int tv;
 
-    if (base < 2 || base > 36) {
-        *buffer = '\0';
-        return buffer;
-    }
+	if (base < 2 || base > 36) {
+		*bufer = '\0';
+		return bufer;
+	}
 
-    ptr = buffer;
-    ptr1 = buffer;
+	p = bufer;
+	p1 = bufer;
 
-    do {
-        tmp_value = value;
-        value /= base;
-        *ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tmp_value - value * base)];
-    } while (value);
+	do {
+		tv = value;
+		value /= base;
+		*p++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tv - value * base)];
+	} while (value);
 
-    if (tmp_value < 0 && base == 10) {
-        *ptr++ = '-';
-    }
-    *ptr-- = '\0';
-    while (ptr1 < ptr) {
-        tmp_char = *ptr;
-        *ptr-- = *ptr1;
-        *ptr1++ = tmp_char;
-    }
-    return buffer;
-}
+	if (tv < 0 && base == 10) 
+	{
+		*p++ = '-';
+	}
 
+	*p-- = '\0';
+
+	while (p1 < p) 
+	{
+		    tc = *p;
+		        *p-- = *p1;
+			    *p1++ = tc;
+	}
 
 /**
  * intduaa - handles the int specifier
