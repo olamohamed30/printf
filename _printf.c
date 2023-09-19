@@ -43,47 +43,37 @@ void stringola(va_list *arg, int *c)
  * count - counts the string bytes
  * du - retrieve the integer argument
  * buffer - hold integers as strings
- * buffer_size - size of local buffer
  */
-void intduaa(va_list *arg, int *c, int buffer_size)
+void intduaa(va_list *arg, int *c)
 {
-	char *buffer;
-        int du = va_arg(*arg, int);
+	char buffer[1024];
+       	int du = va_arg(*arg, int);
 	int count = 0;
-
-	buffer = (char *)malloc(buffer_size * sizeof(char));
-	
-	if (buffer == NULL)
-	{
-		return;
-	}
 
         if (du < 0)
         {
-		buffer[count++] = '-';
-		du = -du;
+                write(1, "-", 1);
 		(*c)++;
+		du = -du;
         }
 	if (du == 0)
 	{
-		buffer[count++] = '0';
+		write(1, "0", 1);
 		(*c)++;
 	}
 	else
 	{
-		while (du > 0 && count < buffer_size)
+		while (du > 0)
 		{
 			buffer[count++] = '0' + du % 10;
 			du /= 10;
 		}
+		while (count > 0)
+		{
+			write(1, &buffer[--count], 1);
+			(*c)++;
+		}
 	}
-	while (count > 0)
-	{
-		write(1, &buffer[--count], 1);
-		(*c)++;
-	}
-
-	free(buffer);
 }
 /**
  * allspec - know the specifier then go to its fun
@@ -108,10 +98,10 @@ int allspec(const char *format, va_list *arg, int *c)
 			(*c)++;
 			return (2);
 		case 'i':
-			intduaa(arg, c, 1024);
+			intduaa(arg, c);
                         return (2);
 		case 'd':
-			intduaa(arg, c, 1024);
+			intduaa(arg, c);
 			return (2);
 
 		default:

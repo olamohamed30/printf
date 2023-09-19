@@ -45,7 +45,7 @@ int _printf(const char *format, ...);
 	*c += inc;
 }*/
 
- /**
+/**
  * intduaa - handles the int specifier
  * count - counts the string bytes
  * du - retrieve the integer argument
@@ -54,7 +54,7 @@ int _printf(const char *format, ...);
  * start - reverse string
  * end - reverse the string
  * tmp - handles reversing the string
- *
+ 
 void intduaa(va_list *arg, int *c)
 {
         char buffer[20];
