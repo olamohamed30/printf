@@ -209,11 +209,6 @@ int _printf(const char *format, ...)
 
 	va_start(arg, format);
 
-	if (arg == NULL)
-	{
-		return (-1);
-	}
-
 	for (in = 0; format && format[in]; in++)
 	{
 		if (format[in] == '%')
