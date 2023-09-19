@@ -130,7 +130,7 @@ void stringola(va_list *arg, int *c)
 	char *st;
 	int k;
 
-	st = va_arg(*arg, char*);
+	st = va_arg(*arg, char);
 
 	if (st == NULL)
 	{
