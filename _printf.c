@@ -121,10 +121,10 @@ int allspec(const char *format, va_list *arg, int *c)
 			return (2);
 		case 'i':
 			intduaa(arg, c);
-                        return (4);
+                        return (2);
 		case 'd':
 			intduaa(arg, c);
-			return (4);
+			return (2);
 		case 'r':
 			rev_st(arg, c);
 			return(2);
