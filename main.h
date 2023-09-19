@@ -12,6 +12,10 @@
 int _printf(const char *format, ...);
 void rev_st(va_list *arg, int *c);
 void intduaa(va_list *arg, int *c);
+void olaunsign(va_list *arg, int *c);
+void olaoctal(va_list *arg, int *c);
+void olahexlower(va_list *arg, int *c);
+void olahexupper(va_list *arg, int *c);
 
 /**
  * intduaa - handles the int specifier
