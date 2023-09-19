@@ -313,6 +313,7 @@ int _printf(const char *format, ...)
 	int c = 0;
 	va_list arg;
 	int in;
+	 int chprosses;
 
 	va_start(arg,format);
 
@@ -322,7 +323,6 @@ int _printf(const char *format, ...)
 		{
 			if (format[in + 1] == '\0')
 				return (-1);
-			int chprosses;
 
 			chprosses = allspec(format + in, &arg, &c);
 			in += chprosses;
