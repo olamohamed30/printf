@@ -3,8 +3,85 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "main.h"
+/**
+ * intduaa - handles the int specifier
+ * count - counts the string bytes
+ * du - retrieve the integer argument
+ * buffer - hold integers as strings
+ */
+ void intduaa(va_list *arg, int *c)
+{
+        char buffer[1024];
+        int du = va_arg(*arg, int);
+        int count = 0;
 
+        if (du < 0)
+        {
+                write(1, "-", 1);
+                (*c)++;
+                du = -du;
+        }
+        if (du == 0)
+        {
+                write(1, "0", 1);
+                (*c)++;
+        }
+        else
+        {
+                while (du > 0)
+                {
+                        buffer[count++] = '0' + du % 10;
+                        du /= 10;
+                }
+                while (count > 0)
+                {
+                        write(1, &buffer[--count], 1);
+                        (*c)++;
+                }
+        }
+}
 
+#include "main.h"
+/**
+ * rev_st - handles the %r specifer
+ * @arg: argument parameter handeling
+ * @c: counting paratmeter handling
+ * l - lenth of string
+ * y: prints string in reverse
+ * @st - retrives the string argument
+ */
+void rev_st(va_list *arg, int *c)
+{
+        char *st = va_arg(*arg, char *);
+        int l = 0;
+        int y;
+
+        while (st[l] != '\0')
+                l++;
+        for (y = l - 1; y >= 0; y--)
+        {
+                write(1, &st[y], 1);
+                (*c)++;
+        }
+}
+
+/**
+ * olaoctal - fun deals with the octal specifier 
+ * @arg: Argu list
+ * @c: Count for printed char
+ */
+void olaoctal(va_list *arg, int *c)
+{
+	unsigned int n = va_arg(*arg, unsigned int);
+	char bufer[20];
+	itoa(num, bufer, 8);
+	for (int j = 0; buffer[j]; j++)
+	{
+		write(1, &bufer[j], 1);
+		(*c)++;
+	}
+}
 
 /**
  * charola - Handles the char specifier.
