@@ -6,9 +6,10 @@
 
 #include <stdbool.h>
 
-char* itoa(int value, char* buffer, int base) {
-    char* ptr;
-    char* ptr1;
+char* itoa(int value, char* buffer, int base)
+{
+    char *ptr;
+    char *ptr1;
     char tmp_char;
     int tmp_value;
 
