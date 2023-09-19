@@ -47,7 +47,7 @@ char* itoa(int value, char* buffer, int base) {
  */
  void intduaa(va_list *arg, int *c)
 {
-        char buffer[1024];
+        char buffer[BUF_SIZE];
         int du = va_arg(*arg, int);
         int count = 0;
 
@@ -64,7 +64,7 @@ char* itoa(int value, char* buffer, int base) {
         }
         else
         {
-                while (du > 0)
+                while (du > 0 && count <  BUF_SIZE )
                 {
                         buffer[count++] = '0' + du % 10;
                         du /= 10;
