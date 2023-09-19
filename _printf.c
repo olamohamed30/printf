@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "main.h"
-
 #include <stdbool.h>
 
 char* itoa(int value, char* buffer, int base) {
@@ -39,7 +37,6 @@ char* itoa(int value, char* buffer, int base) {
     }
     return buffer;
 }
-
 
 
 /**
@@ -80,7 +77,6 @@ char* itoa(int value, char* buffer, int base) {
         }
 }
 
-#include "main.h"
 /**
  * rev_st - handles the %r specifer
  * @arg: argument parameter handeling
@@ -173,14 +169,7 @@ void stringola(va_list *arg, int *c)
 	char *st;
 	int k;
 
-	st = va_arg(*arg, char*);
-
-	if (st == NULL)
-	{
-		write (1 , "null", 4);
-		(*c) += 4;
-		return;
-	}
+	st = va_arg(*arg, char *);
 
 	for (k = 0; st && st[k]; k++)
 	{
@@ -290,7 +279,7 @@ int _printf(const char *format, ...)
 	va_list arg;
 	int in;
 
-	va_start(arg, format);
+	va_start(arg,format);
 
 	for (in = 0; format && format[in]; in++)
 	{
