@@ -10,9 +10,9 @@
  * du - retrieve the integer argument
  * buffer - hold integers as strings
  */
- void intduaa(va_list *arg, int *c)
+void intduaa(va_list *arg, int *c)
 {
-        char buffer[1024];
+	char buffer[1024];
         int du = va_arg(*arg, int);
         int count = 0;
 
