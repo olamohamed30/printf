@@ -43,32 +43,29 @@ void stringola(va_list *arg, int *c)
  * count - counts the string bytes
  * du - retrieve the integer argument
  * buffer - hold integers as strings
- * inc - initialize num of char to zero
- * start - reverse string
- * end - reverse the string
- * tmp - handles reversing the string
+ * buffer_size - size of local buffer
  */
-void intduaa(va_list *arg, int *c, char *buffer, int buffer_size)
+void intduaa(va_list *arg, int *c, int buffer_size)
 {
+	char *buffer;
         int du = va_arg(*arg, int);
 	int count = 0;
 
-	int inc = 0;
-        int start = 0;
-        int end = inc - 1;
-        char temp;
+	buffer = (char *)malloc(buffer_size * sizeof(char));
+	
+	if (buffer == NULL)
+	{
+		return;
+	}
 
         if (du < 0)
         {
-		inc = 1;
-                write(1, "-", 1);
-		(*c)++;
+		buffer[count++] = '-';
 		du = -du;
         }
 	if (du == 0)
 	{
-		write(1, "0", 1);
-		(*c)++;
+		buffer[count++] = '0';
 	}
 	else
 	{
@@ -77,27 +74,14 @@ void intduaa(va_list *arg, int *c, char *buffer, int buffer_size)
 			buffer[count++] = '0' + du % 10;
 			du /= 10;
 		}
-		while (count > 0)
-		{
-			write(1, &buffer[--count], 1);
-			(*c)++;
-		}
 	}
-
-	if (inc && count < buffer_size)
+	while (count > 0)
 	{
-		buffer[count++]= '-';
+		write(1, &buffer[--count], 1);
+		(*c)++;
 	}
 
-        while (start < end)
-        {
-                temp = buffer[start];
-                buffer[start++] = buffer [end];
-                buffer[end--] = temp;
-        }
-
-        write(1, buffer, count);
-	(*c) += count;
+	free(buffer);
 }
 /**
  * allspec - know the specifier then go to its fun
@@ -108,7 +92,6 @@ void intduaa(va_list *arg, int *c, char *buffer, int buffer_size)
       */
 int allspec(const char *format, va_list *arg, int *c)
 {
-	 char buffer[1024];
 
 	switch (format[1])
 	{
@@ -123,8 +106,10 @@ int allspec(const char *format, va_list *arg, int *c)
 			(*c)++;
 			return (2);
 		case 'i':
+			intduaa(arg, c, 1024);
+                        return (2);
 		case 'd':
-			intduaa(arg, c, buffer, sizeof(buffer));
+			intduaa(arg, c, 1024);
 			return (2);
 
 		default:
