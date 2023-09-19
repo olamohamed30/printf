@@ -129,7 +129,7 @@ void olaunsign(va_list *arg, int *c)
 /**
  * stringola - string specifier
  * @arg: Arg
- * @c: Count for printed char
+ * @c: Ciount for printed char
  */
 void stringola(va_list *arg, int *c)
 {
@@ -137,6 +137,13 @@ void stringola(va_list *arg, int *c)
 	int k;
 
 	st = va_arg(*arg, char*);
+
+	if (st == NULL)
+	{
+		write (1 , "null", 4);
+		(*c) += 4;
+		return;
+	}
 
 	for (k = 0; st && st[k]; k++)
 	{
