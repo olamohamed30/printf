@@ -27,13 +27,15 @@ void olapoint(va_list *arg, int *c)
 	}
 }
 
-char* itoa(int value, char* bufer, int base) {
+char *itoa(int value, char *bufer, int base)
+{
 	char *p;
 	char *p1;
 	char tc;
 	int tv;
 
-	if (base < 2 || base > 36) {
+	if (base < 2 || base > 36)
+	{
 		*bufer = '\0';
 		return bufer;
 	}
@@ -41,11 +43,13 @@ char* itoa(int value, char* bufer, int base) {
 	p = bufer;
 	p1 = bufer;
 
-	do {
+	do
+	{
 		tv = value;
 		value /= base;
 		*p++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tv - value * base)];
-	} while (value);
+	}
+	while (value);
 
 	if (tv < 0 && base == 10) 
 	{
@@ -60,6 +64,9 @@ char* itoa(int value, char* bufer, int base) {
 		        *p-- = *p1;
 			    *p1++ = tc;
 	}
+
+	return (bufer);
+}
 
 /**
  * intduaa - handles the int specifier
