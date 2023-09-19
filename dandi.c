@@ -1,31 +1,13 @@
-#ifndef MAIN_H
-#define MAIN_H
-#include <stdio.h>
-#include <limits.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <unistd.h>
-
-#define BUFSIZE 1024
-
-int _printf(const char *format, ...);
-void rev_st(va_list *arg, int *c);
-void intduaa(va_list *arg, int *c);
-
+#include "main.h"
 /**
  * intduaa - handles the int specifier
  * count - counts the string bytes
  * du - retrieve the integer argument
  * buffer - hold integers as strings
- * inc - initialize num of char to zero
- * start - reverse string
- * end - reverse the string
- * tmp - handles reversing the string
- 
+ */
 void intduaa(va_list *arg, int *c)
 {
-        char buffer[20];
+        char buffer[1024];
         int du = va_arg(*arg, int);
         int count = 0;
 
@@ -53,6 +35,4 @@ void intduaa(va_list *arg, int *c)
                         (*c)++;
                 }
         }
-}*/
-
-#endif
+}
