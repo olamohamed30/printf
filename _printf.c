@@ -134,7 +134,7 @@ void stringola(va_list *arg, int *c)
 	char *st;
 	int k;
 
-	st = va_arg(*arg, char);
+	st = va_arg(*arg, char *);
 
 	for (k = 0; st && st[k]; k++)
 	{
@@ -244,7 +244,7 @@ int _printf(const char *format, ...)
 	va_list arg;
 	int in;
 
-	va_start(arg, format);
+	va_start(arg,format);
 
 	for (in = 0; format && format[in]; in++)
 	{
