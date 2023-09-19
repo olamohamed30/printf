@@ -21,6 +21,25 @@ void charola(va_list *arg, int *c)
 }
 
 /**
+ * olaunsig - a fun that deals withunsigned specifier 
+ * @arg: Arg list
+ * @c: Count printed char
+ */
+void olaunsign(va_list *arg, int *c);
+{
+	int in;
+	unsigned int n = va_arg(*arg, unsigned int);
+	char buffer[20];
+
+	itoa(n, buffer, 10);
+	for ( in = 0; buffer[in]; in++)
+	{
+		write(1, &buffer[in], 1);
+		(*c)++;
+	}
+}
+
+/**
  * stringola - string specifier
  * @arg: Arg
  * @c: Count for printed char
