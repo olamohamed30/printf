@@ -51,6 +51,19 @@ int allspec(const char *format, va_list *arg, int *c)
 
 	switch (format[1])
 	{
+		case 'u':
+			olaunsig(arg, c);
+			return (2);
+		case 'X':
+			olahexupper(arg, c);
+			return (2);
+		case 'o':
+			olaoctal(arg, c);
+			return (2);
+		case 'x':
+			olahexlower(arg, c);
+			return (2);
+			    
 		case 'c':
 			charola(arg, c);
 			return (2);
