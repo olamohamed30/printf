@@ -5,6 +5,25 @@
 #include <ctype.h>
 
 #include <stdbool.h>
+/**
+ * olapoint - Handles the pointer specifier
+ * @args: Arg list
+ * @c: Counter for printed characters
+ */
+void olapoint(va_list *arg, int *c)
+{
+	void *ad = va_arg(*arg, void*);
+	int in;
+	char buffer[20];
+
+	sprintf(buffer, "%p", ad);
+
+	for (in = 0; buffer[in]; in++)
+	{
+		write(1, &buffer[in], 1);
+		(*c)++;
+	}
+}
 
 char* itoa(int value, char* bufer, int base) {
 	char *p;
@@ -129,8 +148,6 @@ void olaoctal(va_list *arg, int *c)
  * @c: The character count.
  *
  * Description: This function handles the character specifier for the custom
- * printf function. It retrieves the character from the argument list, writes
- * ithe t, and increments the character count.
  */
 void charola(va_list *arg, int *c)
 {
@@ -231,6 +248,9 @@ int allspec(const char *format, va_list *arg, int *c)
 
 	switch (format[1])
 	{
+		case 'p':
+			olapoint(arg, c);
+			return (2);
 		case 'u':
 			olaunsign(arg, c);
 			return (2);
