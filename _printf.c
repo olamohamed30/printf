@@ -26,7 +26,17 @@ void olapoint(va_list *arg, int *c)
 		(*c)++;
 	}
 }
-
+/**
+ * @p:
+ * @p1
+ * @bufer
+ * *itoa - pointer handeles specifier
+ * tc - temp count
+ * tv - temp. value
+ * base:
+ * value: count the bufer
+ * return: return the bufer value
+ */
 char *itoa(int value, char *bufer, int base)
 {
 	char *p;
@@ -310,6 +320,8 @@ int _printf(const char *format, ...)
 	{
 		if (format[in] == '%')
 		{
+			if (format[in + 1] == '\0')
+				return (-1);
 			int chprosses;
 
 			chprosses = allspec(format + in, &arg, &c);
