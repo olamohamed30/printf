@@ -4,6 +4,51 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#include <stdbool.h>
+
+char *itoa(int value, char *buffer, int base)
+{
+	char *ptr;
+	char *ptr1;
+	char tmp_char;
+	int tmp_value;
+
+	if (base < 2 || base > 36)
+	{
+		*buffer = '\0';
+		return buffer;
+	}
+
+	ptr = buffer;
+	ptr1 = buffer;
+
+	do
+	{
+		tmp_value = value;
+		value /= base;
+		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tmp_value - value * base)];
+	}
+	
+	while (value);
+
+	
+	if (tmp_value < 0 && base == 10)
+	{
+		*ptr++ = '-';
+	}
+	
+	*ptr-- = '\0';
+	
+	while (ptr1 < ptr) 
+	{
+		tmp_char = *ptr;
+		*ptr-- = *ptr1;
+		*ptr1++ = tmp_char;
+	}
+	
+	return buffer;
+}
+
 /**
  * intduaa - handles the int specifier
  * count - counts the string bytes
@@ -12,34 +57,34 @@
  */
 void intduaa(va_list *arg, int *c)
 {
-	char buffer[1024];
-        int du = va_arg(*arg, int);
-        int count = 0;
+	char buffer[BUFSIZE];
+	int du = va_arg(*arg, int);
+	int count = 0;
 
-        if (du < 0)
-        {
-                write(1, "-", 1);
-                (*c)++;
-                du = -du;
-        }
-        if (du == 0)
-        {
-                write(1, "0", 1);
-                (*c)++;
-        }
-        else
-        {
-                while (du > 0)
-                {
-                        buffer[count++] = '0' + du % 10;
-                        du /= 10;
-                }
-                while (count > 0)
-                {
-                        write(1, &buffer[--count], 1);
-                        (*c)++;
-                }
-        }
+	if (du < 0)
+	{
+		write(1, "-", 1);
+		(*c)++;
+		du = -du;
+	}
+	if (du == 0)
+	{
+		write(1, "0", 1);
+		(*c)++;
+	}
+	else
+	{
+		while (du > 0 && count <  BUFSIZE )
+		{
+			buffer[count++] = '0' + du % 10;
+			du /= 10;
+		}
+		while (count > 0)
+		{
+			write(1, &buffer[--count], 1);
+			(*c)++;
+		}
+	}
 }
 
 /**
@@ -49,20 +94,20 @@ void intduaa(va_list *arg, int *c)
  * l - lenth of string
  * y: prints string in reverse
  * @st - retrives the string argument
- */
+*/
 void rev_st(va_list *arg, int *c)
 {
-        char *st = va_arg(*arg, char *);
-        int l = 0;
-        int y;
+	char *st = va_arg(*arg, char *);
+	int l = 0;
+	int y;
 
-        while (st[l] != '\0')
-                l++;
-        for (y = l - 1; y >= 0; y--)
-        {
-                write(1, &st[y], 1);
-                (*c)++;
-        }
+	while (st[l] != '\0')
+		l++;
+	for (y = l - 1; y >= 0; y--)
+	{
+		write(1, &st[y], 1);
+		(*c)++;
+	}
 }
 
 /**
@@ -83,8 +128,6 @@ void olaoctal(va_list *arg, int *c)
 		(*c)++;
 	}
 }
-
-
 
 
 /**
@@ -123,7 +166,6 @@ void olaunsign(va_list *arg, int *c)
 		(*c)++;
 	}
 }
-
 /**
  * stringola - string specifier
  * @arg: Arg
@@ -135,14 +177,12 @@ void stringola(va_list *arg, int *c)
 	int k;
 
 	st = va_arg(*arg, char *);
-
 	for (k = 0; st && st[k]; k++)
 	{
 		write(1, &st[k], 1);
 		(*c)++;
 	}
 }
-
 
 /**
  * olahexlower - fun deals with the octal specifier 
@@ -151,16 +191,16 @@ void stringola(va_list *arg, int *c)
  */
 void olahexlower(va_list *arg, int *c)
 {
-unsigned int n = va_arg(*arg, unsigned int);
-    char buffer[20];
-    int in ;
-    
-    itoa(n, buffer, 16);
-    for (in = 0; buffer[in]; in++)
-    {
-        write(1, &buffer[in], 1);
-        (*c)++;
-    }
+	unsigned int n = va_arg(*arg, unsigned int);
+	char buffer[20];
+	int in;
+
+	itoa(n, buffer, 16);
+	for (in = 0; buffer[in]; in++)
+	{
+		write(1, &buffer[in], 1);
+		(*c)++;
+	}
 }
 
 /**
@@ -170,17 +210,17 @@ unsigned int n = va_arg(*arg, unsigned int);
  */
 void olahexupper(va_list *arg, int *c)
 {
-    unsigned int n = va_arg(*arg, unsigned int);
-    char buffer[20];
-    int j;
-    itoa(n, buffer, 16);
-    for (j = 0; buffer[j]; j++)
-    {
-        buffer[j] = toupper(buffer[j]);
-        
-        write(1, &buffer[j], 1);
-        (*c)++;
-    }
+	unsigned int n = va_arg(*arg, unsigned int);
+	char buffer[20];
+	int j;
+	itoa(n, buffer, 16);
+	
+	for (j = 0; buffer[j]; j++)
+	{
+		buffer[j] = toupper(buffer[j]);
+		write(1, &buffer[j], 1);
+		(*c)++;
+	}
 }
 
 /**
@@ -189,7 +229,7 @@ void olahexupper(va_list *arg, int *c)
  * @arg: Arg list
  * @c: Counter for printed characters
  * Return: Numb of char ( 1 or 2)
-      */
+*/
 int allspec(const char *format, va_list *arg, int *c)
 {
 
